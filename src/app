@@ -2,7 +2,7 @@
 from pyfiglet import Figlet
 import argparse, sys, datetime, pytz
 
-VAR_CHOICES={'1h' : 'an hour', '1d':'a day', '1mo':'a month', '1y':'a year'}
+VAR_CHOICES=('1h', '1d', '1mo', '1y')
 FORMAT = "%Y%m%dT%H%M%SZ"
 def show_title():
     """Show the program title
@@ -12,7 +12,7 @@ def show_title():
 
 def parse_args():
     parser = argparse.ArgumentParser( description = 'Print periodic tasks timestamps')
-    #parser.add_argument("--period", metavar='', type=str, required=True, choices=VAR_CHOICES.keys(), help="The supported periods are: 1h, 1d, 1mo, 1y.")
+    #parser.add_argument("--period", metavar='', type=str, required=True, choices=VAR_CHOICES, help="The supported periods are: 1h, 1d, 1mo, 1y.")
     parser.add_argument("--period", metavar='', type=str, required=True, help="The supported periods are: 1h, 1d, 1mo, 1y.")
     parser.add_argument("--t1",metavar='', required=True, help="t1 in UTC with seconds accuracy, in the following form: 20060102T150405Z")
     parser.add_argument("--t2",metavar='', required=True, help="t2 in UTC with seconds accuracy, in the following form: 20060102T150405Z")
@@ -20,23 +20,20 @@ def parse_args():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-v','--verbose', action='store_true', default=False, help="increase the verbosity level")
     output = parser.parse_args()
-
+    
     if output.period not in VAR_CHOICES:
         parser.error("ERROR: Unsupported period")
-
     _validate_timezone(output.tz,parser)
 
     date_list=[output.t1,output.t2]
     for input_date in date_list:
-        _validate_datetime(input_date,parser)
-        
+        _validate_datetime(input_date,parser) 
+
     return output
 
 
 def _validate_timezone(input_timezone,parser):
-    if input_timezone in pytz.all_timezones:
-        pass
-    else:
+    if input_timezone not in pytz.all_timezones:
         parser.error('Invalid timezone string!')
 
 
@@ -65,9 +62,8 @@ def main():
             print(args)
             sys.exit(0)
         except ValueError:
-            if period not in VAR_CHOICES.keys():
+            if period not in VAR_CHOICES:
                 print('ERROR: Unsupported period')
-            sys.stderr.write("spam\n")
             sys.exit(10)
 
 
