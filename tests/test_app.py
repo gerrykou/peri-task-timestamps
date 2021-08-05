@@ -1,7 +1,7 @@
-from src.questions import *
+from src.app import *
 import unittest
 
-class TestQuestions(unittest.TestCase):
+class TestAPP(unittest.TestCase):
 
     # Test 'Parse arguments'
     # 01
