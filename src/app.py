@@ -11,7 +11,6 @@ def show_title():
     print(f.renderText('peri task timestamps'))
 
 def parse_args():
-
     parser = argparse.ArgumentParser( description = 'Print periodic tasks timestamps')
     #parser.add_argument("--period", metavar='', type=str, required=True, choices=VAR_CHOICES.keys(), help="The supported periods are: 1h, 1d, 1mo, 1y.")
     parser.add_argument("--period", metavar='', type=str, required=True, help="The supported periods are: 1h, 1d, 1mo, 1y.")
@@ -21,6 +20,7 @@ def parse_args():
     group = parser.add_mutually_exclusive_group()
     group.add_argument('-v','--verbose', action='store_true', default=False, help="increase the verbosity level")
     output = parser.parse_args()
+
     if output.period not in VAR_CHOICES:
         parser.error("ERROR: Unsupported period")
 
@@ -29,13 +29,16 @@ def parse_args():
     date_list=[output.t1,output.t2]
     for input_date in date_list:
         _validate_datetime(input_date,parser)
+        
     return output
+
 
 def _validate_timezone(input_timezone,parser):
     if input_timezone in pytz.all_timezones:
         pass
     else:
         parser.error('Invalid timezone string!')
+
 
 def _validate_datetime(input_date,parser):
     #print(input_date)
