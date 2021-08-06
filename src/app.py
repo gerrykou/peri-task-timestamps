@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pyfiglet import Figlet
-import argparse, sys, datetime, pytz, timedelta
+import argparse, sys, datetime, pytz
 from dateutil.relativedelta import relativedelta
 
 VAR_CHOICES={'1h':'hours=+1', '1d':'days=+1', '1mo':'months=+1', '1y':'years=+1'}
@@ -16,36 +16,50 @@ def parse_args():
     parser.add_argument("--period", metavar='', type=str, required=True, help="The supported periods are: 1h, 1d, 1mo, 1y.")
     parser.add_argument("--t1",metavar='', required=True, help="t1 in UTC with seconds accuracy, in the following form: 20060102T150405Z")
     parser.add_argument("--t2",metavar='', required=True, help="t2 in UTC with seconds accuracy, in the following form: 20060102T150405Z")
-    parser.add_argument("--tz",metavar='', type=str, required=True, help="timezone e.g --tz=Europe/Athens")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument('-v','--verbose', action='store_true', default=False, help="increase the verbosity level")
+    parser.add_argument("--tz",metavar='', type=str, required=True, help="timezone e.g --tz=Europe/Athens ,see http://pytz.sourceforge.net/ and https://en.wikipedia.org/wiki/List_of_tz_database_time_zones")
+    # group = parser.add_mutually_exclusive_group()
+    # group.add_argument('-v','--verbose', action='store_true', default=False, help="increase the verbosity level")
     output = parser.parse_args()
     
     if output.period not in VAR_CHOICES.keys():
-        parser.error("ERROR: Unsupported period")
+        print("ERROR: Unsupported period")
+        exit(10)
 
-    _validate_timezone(output.tz,parser)
+    _validate_timezone(output.tz)
 
     date_list=[output.t1,output.t2]
     for input_date in date_list:
-        _validate_datetime(input_date,parser) 
+        _validate_datetime(input_date) 
+
+    _validate_t2_greater_than_t1(output.t1,output.t2)
+    _validate_period(output.period)
 
     return output
 
 
-def _validate_timezone(input_timezone,parser):
+def _validate_timezone(input_timezone):
     if input_timezone not in pytz.all_timezones:
-        parser.error('Invalid timezone string!')
+        print('ERROR: Invalid timezone string!')
+        exit(10)
+
+def _validate_t2_greater_than_t1(time1,time2):
+    if time1 > time2:
+        print('ERROR: t2 must be greater than t1')
+        exit(10)
 
 
-def _validate_datetime(input_date,parser):
-    #print(input_date)
+def _validate_datetime(input_date):
     try:
         date_object=datetime.datetime.strptime(input_date, FORMAT)
         return date_object
-    except ValueError:
-        parser.error("This is not a correct date string format. It should be YYYYMMDDTHHMMSSZ, try --help for more info")
+    except:
+        print("ERROR: This is not a correct date string format. It should be YYYYMMDDTHHMMSSZ, try --help for more info")
+        exit(10)
 
+def _validate_period(period):
+    if period not in VAR_CHOICES:
+        print('ERROR: Unsupported period')
+        exit(10)
 
 def _datetime_str2obj(input_date):
         date_obj=datetime.datetime.strptime(input_date, FORMAT)
@@ -95,9 +109,8 @@ def main():
             print(args)
             sys.exit(0)
         except ValueError:
-            if period not in VAR_CHOICES:
-                print('ERROR: Unsupported period')
-            sys.exit(10)
+            print('ERROR: Unsupported arguments')
+            exit(10)
 
     
 if __name__ == "__main__":
