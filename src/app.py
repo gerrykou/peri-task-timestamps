@@ -58,14 +58,14 @@ def _validate_period(period):
         exit(10)
 
 
-def _datetime_str2obj(input_date):
-        date_obj=datetime.datetime.strptime(input_date, FORMAT)
-        return date_obj
+def _datetime_str2obj(input_time):
+        time_obj=datetime.datetime.strptime(input_time, FORMAT)
+        return time_obj
 
 
-def _datetime_obj2string(input_date):
-        date_obj=datetime.datetime.strftime(input_date, FORMAT)
-        return date_obj
+def _datetime_obj2string(input_time):
+        time_obj=datetime.datetime.strftime(input_time, FORMAT)
+        return time_obj
 
 
 def _increment_time_f(time,period):
@@ -84,10 +84,18 @@ def _increment_time_f(time,period):
     output = new_timestamp
     return output
 
+def _localize_time_with_tz(time_obj,timezone):
+    output = timezone.localize(time_obj)
+    return output
+
+
 def round_time_object(time_obj,period):
-    if period == '1h' or period == '1d':
+    if period == '1h':
         #round time objects to hour e.g rounds 2021-10-10 20:46:03 to 2021-10-10 20:00:00 
         output = time_obj.replace(second=0, microsecond=0, minute=0, hour=time_obj.hour)
+    if period == '1d':
+        #round time objects to hour e.g rounds 2021-10-10 20:46:03 to 2021-10-10 20:00:00 
+        output = time_obj.replace(second=0, microsecond=0, minute=0, hour=time_obj.hour + 1)
     if period == '1mo':
         #round time objects to hour e.g rounds 2021-10-10 20:46:03 to 2021-10-10 20:00:00 
         output = time_obj.replace(second=0, microsecond=0, minute=0, hour=time_obj.hour)
@@ -118,24 +126,35 @@ def create_timestamps_list(time1_obj, time2_obj, period):
 
 def main():
     #show_title()
-    args = parse_args()
-    PERIOD = args.period
-    T1 = args.t1
-    T2 = args.t2
-    TZ = args.tz
-
-    T1_obj =_datetime_str2obj(T1)
-    T2_obj =_datetime_str2obj(T2)
-    rounded_T1_obj=round_time_object(T1_obj,PERIOD)
-    rounded_T2_obj=round_time_object(T2_obj,PERIOD)
-    create_timestamps_list(rounded_T1_obj, rounded_T2_obj, PERIOD)
     while True:
         try:
-            print("Program arguments:", args)
-            exit(0)
+                args = parse_args()
+                print("Program arguments:", args)
+
+                PERIOD = args.period
+                T1 = args.t1
+                T2 = args.t2
+                TZ = args.tz
+
+                T1_obj =_datetime_str2obj(T1)
+                T2_obj =_datetime_str2obj(T2)
+                timezone=pytz.timezone(TZ)
+
+                T1_obj_UTC = _localize_time_with_tz(T1_obj, timezone)
+                print(T1_obj_UTC)
+                print(_datetime_obj2string(T1_obj_UTC))
+                T2_obj_UTC = _localize_time_with_tz(T2_obj, timezone)
+                print(T2_obj_UTC)
+                print(_datetime_obj2string(T2_obj_UTC))
+
+                rounded_T1_obj=round_time_object(T1_obj_UTC,PERIOD)
+                rounded_T2_obj=round_time_object(T2_obj_UTC,PERIOD)
+                create_timestamps_list(rounded_T1_obj, rounded_T2_obj, PERIOD)
+                exit(0)
         except ValueError:
             print('ERROR: Unsupported arguments')
             exit(10)
+
 
     
 if __name__ == "__main__":
