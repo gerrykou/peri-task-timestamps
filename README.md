@@ -1,7 +1,7 @@
 # Periodic tasks timestamps
 
 ## Run in Docker container - pull image from DockerHub
-docker run --rm -ti gerrykou/peri-task-timestamps bash -c "app --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z"
+docker run --rm -ti gerrykou/peri-task-timestamps bash -c "app.py --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z"
 
 https://hub.docker.com/repository/docker/gerrykou/peri-task-timestamps
 

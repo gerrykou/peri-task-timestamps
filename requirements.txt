@@ -3,3 +3,4 @@ pyfiglet
 python-dateutil
 pytz
 six
+timedelta
