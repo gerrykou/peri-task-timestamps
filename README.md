@@ -6,6 +6,8 @@ docker run --rm -ti gerrykou/peri-task-timestamps bash -c "app --period=1d --tz=
 https://hub.docker.com/repository/docker/gerrykou/peri-task-timestamps
 
 ## Run in Virtualenvironment
+python3 -m venv venv
+venv/bin/python -m pip install -r requirements.txt
 venv/bin/python src/app.py --period=1h --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z -v  
 venv/bin/python -m unittest test.test_app.TestApp.test_datetime_obj2string
 
@@ -23,7 +25,7 @@ python3 -m pip install -r requirements.txt
 app.py --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z -v
 
 ## Run in WSL
-See Run in Linux plus afte export PATH:  
+See Run in Linux, run after export PATH:  
 
 dos2unix src/app.py  
 
