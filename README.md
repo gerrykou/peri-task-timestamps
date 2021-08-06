@@ -8,12 +8,16 @@ https://hub.docker.com/repository/docker/gerrykou/peri-task-timestamps
 ## Run in Virtualenvironment
 make install
 make run
+make run-test
+
 
 ## Run locally
 in shell in the /src run :
 export PATH=$PATH:$(pwd)
+dos2unix src/app.py
+chmod +x src/app.py
 python3 -m pip install -r requirements.txt
-app --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z -v
+app.py --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z -v
 
 ## Build Docker image
 docker build -t peri-task-timestamps .

@@ -1,2 +1,6 @@
+pkg-resources
 pyfiglet
+python-dateutil
 pytz
+six
+timedelta
