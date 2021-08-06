@@ -23,8 +23,8 @@ make run-test
 ```
 
 ## Run in Linux
+in shell in the /src run : 
 ```shell
-in shell in the /src run :  
 export PATH=$PATH:$(pwd)   
 chmod +x src/app.py  
 python3 -m pip install -r requirements.txt  
