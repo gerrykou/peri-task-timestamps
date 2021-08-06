@@ -169,7 +169,7 @@ def create_timestamps_list(time1_obj, time2_obj, period, timezone):
 
 
 def main():
-    #show_title()
+    show_title()
     while True:
         try:
                 args = parse_args()
