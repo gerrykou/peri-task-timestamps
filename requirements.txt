@@ -1,4 +1,3 @@
-pkg-resources
 pyfiglet
 python-dateutil
 pytz
