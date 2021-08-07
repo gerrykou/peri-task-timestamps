@@ -1,4 +1,33 @@
 # Periodic tasks timestamps
+```shell
+                 _   _            _    
+ _ __   ___ _ __(_) | |_ __ _ ___| | __
+| '_ \ / _ \ '__| | | __/ _` / __| |/ /
+| |_) |  __/ |  | | | || (_| \__ \   <
+| .__/ \___|_|  |_|  \__\__,_|___/_|\_\
+|_|
+ _   _                     _
+| |_(_)_ __ ___   ___  ___| |_ __ _ _ __ ___  _ __  ___ 
+| __| | '_ ` _ \ / _ \/ __| __/ _` | '_ ` _ \| '_ \/ __|
+| |_| | | | | | |  __/\__ \ || (_| | | | | | | |_) \__ \
+ \__|_|_| |_| |_|\___||___/\__\__,_|_| |_| |_| .__/|___/
+                                             |_|
+
+usage: app.py [-h] --period  --t1  --t2  --tz
+
+Print periodic tasks timestamps
+
+optional arguments:
+  -h, --help  show this help message and exit
+  --period    The supported periods are: 1h, 1d, 1mo, 1y.
+  --t1        t1 in UTC with seconds accuracy, in the following form:
+              20060102T150405Z
+  --t2        t2 in UTC with seconds accuracy, in the following form:
+              20060102T150405Z
+  --tz        timezone e.g --tz=Europe/Athens ,see
+              http://pytz.sourceforge.net/ and
+              https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+```
 
 ## Run in Docker container - pull image from DockerHub
 ```shell
