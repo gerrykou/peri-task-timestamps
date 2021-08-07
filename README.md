@@ -80,5 +80,6 @@ dos2unix src/app.py
 
 ## Run Tests
 ```shell
-python -m unittest test.test_app.TestApp.test_datetime_obj2string
+python3 -m unittest discover test
+python3 -m unittest test.test_app.TestApp.test_datetime_obj2string
 ```
