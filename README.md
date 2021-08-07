@@ -35,6 +35,12 @@ docker run --rm -ti gerrykou/peri-task-timestamps bash -c "app.py --period=1d --
 ```
 https://hub.docker.com/repository/docker/gerrykou/peri-task-timestamps
 
+## Build Docker image and run
+```shell
+docker build -t peri-task-timestamps .
+docker run --rm -ti peri-task-timestamps bash -c "app.py --period=1d --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z"
+```
+
 ## Run in Virtualenvironment
 ```shell
 python3 -m venv venv
@@ -67,11 +73,6 @@ See Run in Linux, run after export PATH:
 
 ```shell
 dos2unix src/app.py  
-```
-
-## Build Docker image
-```shell
-docker build -t peri-task-timestamps .
 ```
 
 ## Run Tests
