@@ -1,9 +1,6 @@
 import datetime
 import unittest
 import src.app as app
-#from src.app import _datetime_obj2string
-#from src.app import *
-#import _validate_t2_greater_than_t1 #add import *
 
 
 class TestApp(unittest.TestCase):
