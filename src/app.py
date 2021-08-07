@@ -47,7 +47,9 @@ def _validate_datetime(input_date):
 
 
 def _validate_t2_greaterorequal_than_t1(time1,time2):
-    if time1 >= time2:
+    time1_obj= _datetime_str2obj(time1)
+    time2_obj= _datetime_str2obj(time2)
+    if time1_obj >= time2_obj:
         print('ERROR: t2 must be greater than t1')
         exit(10)
 
@@ -59,13 +61,13 @@ def _validate_period(period):
 
 
 def _datetime_str2obj(input_time):
-        time_obj=datetime.datetime.strptime(input_time, FORMAT)
-        return time_obj
+    time_obj=datetime.datetime.strptime(input_time, FORMAT)
+    return time_obj
 
 
 def _datetime_obj2string(input_time):
-        time_obj=datetime.datetime.strftime(input_time, FORMAT)
-        return time_obj
+    time_obj=datetime.datetime.strftime(input_time, FORMAT)
+    return time_obj
 
 def _create_aware_time_object(naive_time_obj):
     #creates aware time objects assigning +00:00 for utc
@@ -154,8 +156,7 @@ def create_timestamps_list(time1_obj, time2_obj, period, timezone):
         incremented_time = _increment_time_f(incremented_time,period)
 
         timestamp_incremented=_datetime_obj2string(incremented_time)
-        # if incremented_time <= time2_obj:
-        #     #to handle when dates pass time2 on last iteration
+
         output_list.append(timestamp_incremented)
 
         count += 1
