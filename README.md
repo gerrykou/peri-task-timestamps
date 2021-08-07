@@ -46,7 +46,7 @@ docker run --rm -ti peri-task-timestamps bash -c "app.py --period=1d --tz=Europe
 python3 -m venv venv
 venv/bin/python -m pip install -r requirements.txt
 venv/bin/python src/app.py --period=1h --tz=Europe/Athens --t1=20211010T204603Z --t2=20211115T123456Z   
-venv/bin/python3 -m unittest discover test
+venv/bin/python -m unittest discover test
 venv/bin/python -m unittest test.test_app.TestApp.test_datetime_obj2string
 ```
 

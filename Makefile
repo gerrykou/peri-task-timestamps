@@ -22,7 +22,7 @@ run-all:
     )
 	
 run-test:
-		venv/bin/python3 -m unittest discover test
+		venv/bin/python -m unittest discover test
 
 run-one-test:
 		venv/bin/python -m unittest test.test_app.TestApp.test_datetime_obj2string
