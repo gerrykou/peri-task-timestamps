@@ -29,3 +29,4 @@ run-one-test:
 
 run-error:
 	venv/bin/python src/app.py --period=1h --tz=Europe/Athens --t1=20211115T123456Z --t2=20211010T204603Z
+	
