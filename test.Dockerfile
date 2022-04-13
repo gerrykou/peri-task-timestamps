@@ -5,6 +5,7 @@ RUN apt install dos2unix
 WORKDIR /Code
 
 COPY requirements.txt .
+RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install -r requirements.txt
 
 COPY src src
