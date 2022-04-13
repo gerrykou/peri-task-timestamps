@@ -28,6 +28,7 @@ jobs:
         run: |
           docker-compose -f docker-compose.yml pull
           docker-compose -f docker-compose.yml build
+          docker-compose -f docker-compose.yml up
       - name: Stop Docker compose
         run: |
           docker-compose -f docker-compose.yml down
