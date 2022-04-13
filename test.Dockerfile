@@ -11,4 +11,4 @@ RUN python3 -m pip install -r requirements.txt
 COPY src src
 COPY test_pytest test_pytest
 
-CMD [ "python3", "-m", "pytest", "test_pytest" ]
+RUN python3 -m pytest test_pytest
