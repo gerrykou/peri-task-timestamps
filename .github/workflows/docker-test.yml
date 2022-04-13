@@ -30,4 +30,4 @@ jobs:
           docker-compose -f docker-compose.yml build
       - name: Stop Docker compose
         run: |
-          docker-compose -f tests/docker-compose.yml down
+          docker-compose -f docker-compose.yml down
