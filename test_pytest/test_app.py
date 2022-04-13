@@ -5,7 +5,7 @@ import src.app as app
 #01
 def test_datetime_obj2string():
     test_input = datetime.datetime(2021, 7, 14, 20, 46, 3)
-    expected_output = '20210714T204603Z'
+    expected_output = '20210714T20403Z'
     actual_output = app._datetime_obj2string(test_input)
     assert expected_output == actual_output
 
