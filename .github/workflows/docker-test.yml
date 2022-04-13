@@ -30,7 +30,7 @@ jobs:
           docker-compose -f docker-compose.yml build
       - name: Run Tests
         run: |          
-          docker-compose -f docker-compose.yml run python -m pytest test_pytest
+          docker-compose -f docker-compose.yml run test python3 -m pytest test_pytest
       - name: Stop Docker compose
         run: |
           docker-compose -f docker-compose.yml down
