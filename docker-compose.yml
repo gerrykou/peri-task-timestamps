@@ -3,5 +3,5 @@ version: '3.7'
 services:
   tests:
     build: 
-      context:
+      context: .
       dockerfile: test.Dockerfile
